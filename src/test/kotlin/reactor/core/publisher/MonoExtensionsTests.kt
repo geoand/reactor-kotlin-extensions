@@ -59,7 +59,7 @@ class MonoExtensionsTests {
     fun mapError() {
         IOException()
                 .toMono<Any>()
-                .mapError(IOException::class, ::IllegalStateException)
+                .onErrorMap(IOException::class, ::IllegalStateException)
                 .test()
                 .verifyError<IllegalStateException>()
     }
@@ -73,14 +73,14 @@ class MonoExtensionsTests {
     @Test
     fun `ofType() with generic parameter`() {
         "foo".toMono().ofType<String>().test().expectNext("foo").verifyComplete()
-        "foo".toMono().ofType<Integer>().test().verifyComplete()
+        "foo".toMono().ofType<Int>().test().verifyComplete()
     }
 
     @Test
     fun otherwise() {
         IOException()
                 .toMono<String>()
-                .otherwise(IOException::class, { "foo".toMono() })
+                .onErrorResume(IOException::class, { "foo".toMono() })
                 .test()
                 .expectNext("foo")
                 .verifyComplete()
@@ -90,7 +90,7 @@ class MonoExtensionsTests {
     fun otherwiseReturn() {
         IOException()
                 .toMono<String>()
-                .otherwiseReturn(IOException::class, "foo")
+                .onErrorReturn(IOException::class, "foo")
                 .test()
                 .expectNext("foo")
                 .verifyComplete()

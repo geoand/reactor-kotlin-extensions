@@ -137,8 +137,8 @@ fun <T, E : Throwable> Flux<T>.doOnError(exceptionType: KClass<E>, onError: (E) 
  *
  * @author Sebastien Deleuze
  */
-fun <T, E : Throwable> Flux<T>.mapError(exceptionType: KClass<E>, mapper: (E) -> Throwable): Flux<T> =
-        mapError(exceptionType.java, { mapper(it) })
+fun <T, E : Throwable> Flux<T>.onErrorMap(exceptionType: KClass<E>, mapper: (E) -> Throwable): Flux<T> =
+        onErrorMap(exceptionType.java, { mapper(it) })
 
 /**
  * Extension for [Flux.ofType] providing a [KClass] based variant.
@@ -159,8 +159,8 @@ inline fun <reified T : Any> Flux<*>.ofType(): Flux<T> = ofType(T::class.java)
  *
  * @author Sebastien Deleuze
  */
-fun <T : Any, E : Throwable> Flux<T>.onErrorResumeWith(exceptionType: KClass<E>, fallback: (E) -> Publisher<T>): Flux<T> =
-        onErrorResumeWith(exceptionType.java, { fallback(it) })
+fun <T : Any, E : Throwable> Flux<T>.onErrorResume(exceptionType: KClass<E>, fallback: (E) -> Publisher<T>): Flux<T> =
+        onErrorResume(exceptionType.java, { fallback(it) })
 
 /**
  * Extension for [Flux.onErrorReturn] providing a [KClass] based variant.
@@ -169,11 +169,3 @@ fun <T : Any, E : Throwable> Flux<T>.onErrorResumeWith(exceptionType: KClass<E>,
  */
 fun <T : Any, E : Throwable> Flux<T>.onErrorReturn(exceptionType: KClass<E>, value: T): Flux<T> =
         onErrorReturn(exceptionType.java, value)
-
-/**
- * Extension for [Flux.switchOnError] providing a [KClass] based variant.
- *
- * @author Sebastien Deleuze
- */
-fun <T : Any, E : Throwable> Flux<T>.switchOnError(exceptionType: KClass<E>, publisher: Publisher<T>): Flux<T> =
-        switchOnError(exceptionType.java, publisher)

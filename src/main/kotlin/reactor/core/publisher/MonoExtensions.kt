@@ -68,8 +68,8 @@ fun <T, E : Throwable> Mono<T>.doOnError(exceptionType: KClass<E>, onError: (E) 
  *
  * @author Sebastien Deleuze
  */
-fun <T, E : Throwable> Mono<T>.mapError(exceptionType: KClass<E>, mapper: (E) -> Throwable): Mono<T> =
-        mapError(exceptionType.java, { mapper(it) })
+fun <T, E : Throwable> Mono<T>.onErrorMap(exceptionType: KClass<E>, mapper: (E) -> Throwable): Mono<T> =
+        onErrorMap(exceptionType.java, { mapper(it) })
 
 /**
  * Extension for [Mono.ofType] providing a [KClass] based variant.
@@ -90,16 +90,16 @@ inline fun <reified T : Any> Mono<*>.ofType(): Mono<T> = ofType(T::class.java)
  *
  * @author Sebastien Deleuze
  */
-fun <T : Any, E : Throwable> Mono<T>.otherwise(exceptionType: KClass<E>, fallback: (E) -> Mono<T>): Mono<T> =
-        otherwise(exceptionType.java, { fallback(it) })
+fun <T : Any, E : Throwable> Mono<T>.onErrorResume(exceptionType: KClass<E>, fallback: (E) -> Mono<T>): Mono<T> =
+        onErrorResume(exceptionType.java, { fallback(it) })
 
 /**
  * Extension for [Mono.otherwiseReturn] providing a [KClass] based variant.
  *
  * @author Sebastien Deleuze
  */
-fun <T : Any, E : Throwable> Mono<T>.otherwiseReturn(exceptionType: KClass<E>, value: T): Mono<T> =
-        otherwiseReturn(exceptionType.java, value)
+fun <T : Any, E : Throwable> Mono<T>.onErrorReturn(exceptionType: KClass<E>, value: T): Mono<T> =
+        onErrorReturn(exceptionType.java, value)
 
 /**
  * Extension for zipping an [Iterable] of [Mono]s.
