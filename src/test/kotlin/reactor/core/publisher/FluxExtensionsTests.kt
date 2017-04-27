@@ -32,7 +32,7 @@ class FluxExtensionsTests {
     }
 
     @Test
-    fun mapError() {
+    fun onErrorMap() {
         IOException()
                 .toFlux<Any>()
                 .onErrorMap(IOException::class, ::IllegalStateException)
@@ -51,7 +51,7 @@ class FluxExtensionsTests {
     }
 
     @Test
-    fun onErrorResumeWith() {
+    fun onErrorResume() {
         IOException()
                 .toFlux<String>()
                 .onErrorResume(IOException::class, { "foo".toMono() })
@@ -65,16 +65,6 @@ class FluxExtensionsTests {
         IOException()
                 .toFlux<String>()
                 .onErrorReturn(IOException::class, "foo")
-                .test()
-                .expectNext("foo")
-                .verifyComplete()
-    }
-
-    @Test
-    fun onErrorResume() {
-        IOException()
-                .toFlux<String>()
-                .onErrorResume(IOException::class, { "foo".toMono() })
                 .test()
                 .expectNext("foo")
                 .verifyComplete()

@@ -56,7 +56,7 @@ class MonoExtensionsTests {
     }
 
     @Test
-    fun mapError() {
+    fun onErrorMap() {
         IOException()
                 .toMono<Any>()
                 .onErrorMap(IOException::class, ::IllegalStateException)
@@ -77,7 +77,7 @@ class MonoExtensionsTests {
     }
 
     @Test
-    fun otherwise() {
+    fun onErrorResume() {
         IOException()
                 .toMono<String>()
                 .onErrorResume(IOException::class, { "foo".toMono() })
@@ -87,7 +87,7 @@ class MonoExtensionsTests {
     }
 
     @Test
-    fun otherwiseReturn() {
+    fun onErrorReturn() {
         IOException()
                 .toMono<String>()
                 .onErrorReturn(IOException::class, "foo")
