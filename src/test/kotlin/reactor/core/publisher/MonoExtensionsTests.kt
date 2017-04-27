@@ -46,6 +46,18 @@ class MonoExtensionsTests {
     }
 
     @Test
+    fun `cast() with KClass parameter`() {
+        val monoOfAny: Mono<Any> = Mono.just("foo")
+        monoOfAny.cast(String::class).test().expectNext("foo").verifyComplete()
+    }
+
+    @Test
+    fun `cast() with generic parameter`() {
+        val monoOfAny: Mono<Any> = Mono.just("foo")
+        monoOfAny.cast<String>().test().expectNext("foo").verifyComplete()
+    }
+
+    @Test
     fun doOnError() {
         val monoOnError: Mono<Any> = IllegalStateException().toMono()
         var invoked = false

@@ -16,7 +16,13 @@ class FluxExtensionsTests {
     }
 
     @Test
-    fun cast() {
+    fun `cast() with KClass parameter`() {
+        val fluxOfAny: Flux<Any> = Flux.just("foo")
+        fluxOfAny.cast(String::class).test().expectNext("foo").verifyComplete()
+    }
+
+    @Test
+    fun `cast() with generic parameter`() {
         val fluxOfAny: Flux<Any> = Flux.just("foo")
         fluxOfAny.cast<String>().test().expectNext("foo").verifyComplete()
     }

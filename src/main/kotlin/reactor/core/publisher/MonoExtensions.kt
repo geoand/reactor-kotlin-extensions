@@ -49,6 +49,13 @@ fun <T> Mono<T>.test(): StepVerifier.FirstStep<T> = StepVerifier.create(this)
 fun <T> Mono<T>.test(n: Long): StepVerifier.FirstStep<T> = StepVerifier.create(this, n)
 
 /**
+ * Extension for [Mono.cast] providing a [KClass] based variant.
+ *
+ * @author Sebastien Deleuze
+ */
+fun <T : Any> Mono<*>.cast(kClass: KClass<T>): Mono<T> = cast(kClass.java)
+
+/**
  * Extension for [Mono.cast] providing a `cast<Foo>()` variant.
  *
  * @author Sebastien Deleuze

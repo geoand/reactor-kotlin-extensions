@@ -118,11 +118,19 @@ fun <T> Flux<T>.test(): StepVerifier.FirstStep<T> = StepVerifier.create(this)
 fun <T> Flux<T>.test(n: Long): StepVerifier.FirstStep<T> = StepVerifier.create(this, n)
 
 /**
+ * Extension for [Flux.cast] providing a [KClass] based variant.
+ *
+ * @author Sebastien Deleuze
+ */
+fun <T : Any> Flux<*>.cast(kClass: KClass<T>): Flux<T> = cast(kClass.java)
+
+/**
  * Extension for [Flux.cast] providing a `cast<Foo>()` variant.
  *
  * @author Sebastien Deleuze
  */
 inline fun <reified T : Any> Flux<*>.cast(): Flux<T> = cast(T::class.java)
+
 
 /**
  * Extension for [Flux.doOnError] providing a [KClass] based variant.
