@@ -27,7 +27,7 @@ group = "io.projectreactor"
 
 repositories {
 	mavenCentral()
-    maven { setUrl("https://repo.spring.io/snapshot") }
+    maven { setUrl("https://repo.spring.io/milestone") }
 }
 
 tasks.withType<KotlinCompile> {
@@ -37,7 +37,7 @@ tasks.withType<KotlinCompile> {
 }
 
 val kotlinVersion = extra["kotlinVersion"] as String
-val reactorCoreVersion = "3.1.0.BUILD-SNAPSHOT"
+val reactorCoreVersion = "3.1.0.M1"
 
 dependencies {
 	compile("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
