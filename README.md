@@ -29,7 +29,7 @@ See these unit tests for more code examples:
 ### Release
 
 - Repository: `https://repo.spring.io/milestone`
-- Artifact: `io.projectreactor:reactor-kotlin-extensions:1.0.0.M1`
+- Artifact: `io.projectreactor:reactor-kotlin-extensions:1.0.0.M2`
 
 ### Snapshot
 
