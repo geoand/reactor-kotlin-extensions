@@ -3,7 +3,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
-	val kotlinVersion = "1.1.1"
+	val kotlinVersion = "1.1.2"
 	extra["kotlinVersion"] = kotlinVersion
 
 	repositories {
