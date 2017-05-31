@@ -13,7 +13,7 @@ import java.util.function.Function;
  *
  * @author DoHyung Kim
  */
-class MonoBridges {
+final class MonoBridges {
 
     static Mono<Void> when(Publisher<Void>[] sources) {
         return Mono.when(sources);
